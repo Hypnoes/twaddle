@@ -6,11 +6,12 @@ object Main {
             .builder
             .appName("Simple Application")
             .getOrCreate()
-
-        val pr = 0.35
+        import spark.implicits._
 
         val (input, output) = (args(0), args(1))
         val raw = spark.read.option("header", true).csv(input)
+        
+        val pr = 0.35
         val df = raw.as[Table].map(i => (i, i.alpha, i.beta, i.gamma, i.decs(pr)))
         val xt = df.select("o", "alpha", "beta", "gamma", "decs")
         
@@ -21,18 +22,10 @@ object Main {
     }
     
     case class Table(o: String,
-                    theta_PP: Double, 
-                    theta_BP: Double, 
-                    theta_NP: Double,
-                    theta_PN: Double,
-                    theta_BN: Double,
-                    theta_NN: Double,
-                    phi_PP: Double,
-                    phi_BP: Double,
-                    phi_NP: Double,
-                    phi_PN: Double,
-                    phi_BN: Double,
-                    phi_NN: Double) {
+                    theta_PP: Double, theta_BP: Double, theta_NP: Double,
+                    theta_PN: Double,theta_BN: Double,theta_NN: Double,
+                    phi_PP: Double, phi_BP: Double, phi_NP: Double, 
+                    phi_PN: Double, phi_BN: Double, phi_NN: Double) {
         def alpha = ((theta_BN - theta_PN) + (phi_PN - phi_BN)) / 
             ((theta_BN -theta_PN) + (phi_PN - phi_BN) + (theta_PP - theta_BP) + (phi_BP - phi_PP))
 
@@ -43,9 +36,9 @@ object Main {
             ((theta_NN - theta_PN) + (phi_PN - phi_NN) + (theta_PP - theta_NP) + (phi_NP - phi_PP))
 
         def decs(pr: Double): String = pr match {
-            case pr >= this.alpha              => "POS"
-            case this.alpha >= pr >= this.beta => "BND"
-            case this.beta >= pr               => "NEG"
+            case pr >= alpha         => "POS"
+            case alpha >= pr >= beta => "BND"
+            case beta >= pr          => "NEG"
         } 
     }
 }
