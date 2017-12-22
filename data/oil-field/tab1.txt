@@ -1,4 +1,4 @@
-O theta_PP theta_BP theta_NP theta_PN theta_BN theta_NN phi_PP phi_BP phi_NP phi_PN phi_BN phi_NN
+o theta_PP theta_BP theta_NP theta_PN theta_BN theta_NN phi_PP phi_BP phi_NP phi_PN phi_BN phi_NN
 o1 5 5 0 0 0.5 1 1 2 3 1 0.5 0
 o2 10 8 0 0 1 2 2 3 5 2 1 0
 o3 12 5 0 0 3 6 3 5 8 4 0.5 0
