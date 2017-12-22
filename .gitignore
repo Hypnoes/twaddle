@@ -1,0 +1,8 @@
+.vscode/
+
+project/
+target/
+
+data/test-data
+
+*.log
