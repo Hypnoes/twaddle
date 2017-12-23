@@ -29,7 +29,7 @@ Decision made by following rules:
     gamma = ((theta_NN - theta_PN) + (phi_PN - phi_NN)) /
         ((theta_NN - theta_PN) + (phi_PN - phi_NN) + (theta_PP - theta_NP) + (phi_NP - phi_PP))
     decs(pr: Double) = pr match {
-        case _ if(pr >= alpha)                    => "POS"
+        case _ if(pr >= alpha)                => "POS"
         case _ if(alpha > pr && pr >= beta)   => "BND"
-        case _ if(beta > pr)                      => "NEG"
+        case _ if(beta > pr)                  => "NEG"
     }
