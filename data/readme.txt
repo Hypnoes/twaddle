@@ -1,3 +1,4 @@
+
 Meaning of symbols:
 
 N :=> Negitive
@@ -18,7 +19,7 @@ theta_P* | phi_P* := profits or costs of action "do"
 theta_B* | phi_B* := profits or costs of action "decide later"
 theta_N* | phi_N* := profits or costs of action "ignore"
 
-tab2. threshold parameters of 8 kinds of oil field (as we choose Pr=0.35)
+part-00000-1fb532bc-f82a-403e-b1bf-1ba76074cba9-c000. threshold parameters of 8 kinds of oil field (as we choose Pr=0.35)
 
 Decision made by following rules:
 
