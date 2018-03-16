@@ -8,9 +8,10 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(commonSetting),
     name := "twd_exp_2",
+    description := "bank corruption",
     libraryDependencies ++= Seq(
-      "org.apache.spark" %% "spark-core" % "2.2.0",
-      "org.apache.spark" %% "spark-sql" % "2.2.0",
-      "org.apache.spark" %% "spark-mllib" % "2.2.0"
+      "org.apache.spark" %% "spark-core" % "2.3.0",
+      "org.apache.spark" %% "spark-sql" % "2.3.0",
+      "org.apache.spark" %% "spark-mllib" % "2.3.0"
     )
   )
