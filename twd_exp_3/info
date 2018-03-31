@@ -1,0 +1,9 @@
+-- cluster
+real 0m41.633s
+user 0m46.812s
+sys  0m1.564s
+
+-- local
+real 0m28.898s
+user 0m52.560s
+sys  0m1.236s

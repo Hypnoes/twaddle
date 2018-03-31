@@ -7,21 +7,23 @@ object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
                 .builder
-                .appName("${this.getSimpleClassName}")
+                .appName(f"${this.getSimpleClassName}")
                 .getOrCreate
     import spark.implicits._
 
-    val root = "hdfs://master:9000/users/russy/ML-DataSets/mushroom/expanded.1"
-    val la = "hdfs:// master:9000/users/russy/ML-DataSets/mushroom/la.csv"
-
-    val raw = spark.read.csv(root)
+    val (ifile, ofile) = (args(0), args(1))
+    val raw = spark.read.csv(ifile)
 
     val si = new StringIndexer()
 
-    val sied = raw.columns.foldLeft(raw)((x, i) => { si.setInputCol(i).setOutputCol(i + "x").fit(x).transform(x) })
+    val sied = raw.columns.foldLeft(raw)((x, i) => si
+                  .setInputCol(i)
+                  .setOutputCol(i + "x")
+                  .fit(x)
+                  .transform(x))
     val data = sied.select(sied.colRegex("`_c[0-9]{1,2}x`"))
                     .map(i => (i.getDouble(0), Vectors.dense(i.toSeq.drop(1).map(_.toString.toDouble).toArray)))
-                    .toDF("label", "feature")
+                    .toDF("label", "features")
 
     val lr = new LogisticRegression()
                 .setMaxIter(100)
@@ -50,7 +52,7 @@ object Main {
                     .map(i => (i.param_1, i.param_2, decs(i.param_2, alpha, beta)))
                     .toDF("label", "probability", "region")
 
-    twda.write.csv("hdfs://master:9000/users/russy/mushroom/twda.csv")
+    twda.write.csv(ofile)
 
     spark.stop()
   }
