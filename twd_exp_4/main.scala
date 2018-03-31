@@ -11,7 +11,7 @@ object Main {
       .getOrCreate
     import spark.implicits._
 
-    val file = "hdfs://192.168.50.51:9000/user/hadoop/connect-4/connect-4.data"
+    val file = args(0)
     val df = spark.read.csv(file)
 
     val si = new StringIndexer()
