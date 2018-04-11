@@ -7,7 +7,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
                 .builder
-                .appName(f"${this.getSimpleClassName}")
+                .appName("Mushroom")
                 .getOrCreate
     import spark.implicits._
 
