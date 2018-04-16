@@ -1,5 +1,15 @@
 [accuracy]
-lroa: = 0.3344731115946534
-lroa: (label == 2.0) = 0.09544532764924434
-lroa: (label == 1.0) = 0.22154624983347396
-lroa: (label == 0.0) = 0.017481534111935107
+lroa  := 0.665526888405347
+
+ce List[Double] = List(0.5055878739434848, 0.652078985153278)
+
+[time]
+-- cluster
+real 1m22.767s
+user 1m19.632s
+sys  0m2.508s
+
+-- local
+real 1m22.491s
+user 2m20.284s
+sys  0m2.508s
