@@ -110,7 +110,6 @@ object Main {
     
     spark.stop
   }
-
   
   case class Lro(label: Double, features: Vector, rawPrediction: Vector, 
                   probability: Vector, prediction: Double)
@@ -119,9 +118,9 @@ object Main {
   case class T2(label: Double, features: Vector, probability: Double, prediction: Double) {
     val pr = probability
     def decs(alpha: Double, beta: Double): Double = pr match {
-      case _ if (pr >= alpha)             => 0.0
+      case _ if (pr >= alpha)             => 1.0
       case _ if (alpha > pr && pr > beta) => 0.5
-      case _ if (beta >= pr)              => 1.0
+      case _ if (beta >= pr)              => 0.0
     }
   }
   case class T3(label: Double, features: Vector, probability: Double, 
