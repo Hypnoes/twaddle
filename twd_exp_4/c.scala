@@ -25,15 +25,19 @@ object C {
     val f1 = Array(c0._5, c1._5)
     C_(alpha, beta, pl, rl, tprl, fprl, f1) 
   }
-
-  val s_ = regs.map(r => c(r._1, r._2, t2s.map(i => T3(i.label, i.features, i.probability, i.prediction, i.decs(r._1, r._2), {
-    i.decs(r._1, r._2) match {
-      case 1.0 => i.prediction
-      case 0.5 => 0.5
-      case 0.0 => -1.0
-      case _   => -2.0
-    }
-  })))).toDF.as[C_]
+  
+  val t2s = lroa.select("label", "features", "probability", "prediction")
+                .map(i => T2(i.getDouble(0), i.getAs[Vector](1), i.getAs[Vector](2).apply(0), i.getDouble(3)))
+  val s_ = regs.map(r => c(r._1, r._2, 
+                            t2s.map(i => T3(i.label, i.features, i.probability, i.prediction, 
+                                              i.decs(r._1, r._2), {
+                                                i.decs(r._1, r._2) match {
+                                                  case 1.0 => i.prediction
+                                                  case 0.5 => 0.5
+                                                  case 0.0 => -1.0
+                                                  case _   => -2.0
+                                                }
+                                              })))).toDF.as[C_]
 
   case class T2(label: Double, features: Vector, probability: Double, prediction: Double) {
     val pr = probability
